@@ -51,7 +51,7 @@ public class GraphAlgorithms {
         //For each edge in teh start vertex add to PQ
         Set<Edge<T>> edges = graph.getEdges();
         for (Edge<T> edge: edges){
-            if (edge.getU().equals(start)){
+            if (edge.getU().equals(start) || edge.getV().equals(start)){
                 priorityQueue.add(edge);
             }
         }
@@ -62,12 +62,16 @@ public class GraphAlgorithms {
             if (!visitedSet.contains(smallestEdge.getV())){
                 visitedSet.add(smallestEdge.getV());
                 mst.add(smallestEdge);
+                mst.add(new Edge<>(smallestEdge.getV(), smallestEdge.getU(), smallestEdge.getWeight()));
                 for (Edge<T> edge: edges){
                     if (edge.getU().equals(smallestEdge.getV()) && !visitedSet.contains(edge.getV())){
                         priorityQueue.add(edge);
                     }
                 }
             }
+        }
+        if (mst.size() != 2 * (Math.abs(graph.getVertices().size()) - 1)){
+            return null;
         }
         return mst;
     }

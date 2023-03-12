@@ -78,6 +78,7 @@ public class Main {
         Graph<Character> letters = new Graph<>(vertices, edges);
         Set<Vertex<Character>> verticesFound = letters.getVertices();
         Set<Edge<Character>> primMST = GraphAlgorithms.prims(b, letters);
+        System.out.println(primMST);
 
 
     }
